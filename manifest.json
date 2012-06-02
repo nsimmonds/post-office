@@ -1,0 +1,41 @@
+{
+	"name": "Post Office",
+	"version": "0.72",
+	"manifest_version": 2,
+	"options_page" : "preferences.html",
+	"description": "Chrome email functions",
+	"default_popup": "preferences.html",
+	"browser_action": {
+    	"default_icon": "disicon.png",
+    	"default_title": "Post Office"
+    },
+    "content_scripts": [
+    	{
+    		"matches": ["http://*/*"],
+    		"js": [
+    				"jquery-1.7.2.min.js",
+    				"mailscripts.js"
+    				]
+    	}
+    ],
+	"background" : { 
+		"scripts": [
+					"mail.js",
+					"toggle.js"
+					]
+	},
+
+	"permissions": [
+		"contextMenus",
+		"links",
+		"http://*/*",
+		"https://*/*"
+	],
+	
+	"icons": {
+		"16" : "minicon.png",
+		"48" : "midicon.png",
+		"128" : "bigicon.png"
+	}
+
+}
