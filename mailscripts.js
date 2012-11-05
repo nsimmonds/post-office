@@ -13,7 +13,7 @@ var def;
 var mailUrl;
 
 // Send a request to the extension. Extension replies with a 4 character response
-chrome.extension.sendRequest({"localStorage" : "toggle"}, function(response){
+chrome.extension.sendMessage({"localStorage" : "toggle"}, function(response){
 // take the first two characters and assign them to toggle.  Should be either "on"
 // or "no"
 	toggle = response.substring(0,2);

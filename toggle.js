@@ -45,4 +45,4 @@ function toggleReq (request, sender, sendResponse) {
 }
 
 // calls the toggleReq function whenever a request is sent
-chrome.extension.onRequest.addListener(toggleReq);
+chrome.extension.onMessage.addListener(toggleReq);
