@@ -7,6 +7,24 @@ var lMailUrl = "http://mail.live.com/?rru=compose&to=";
 var owaHTTP = localStorage["owaUrl"];
 var owaUrl = "https://"+owaHTTP+"/owa/?ae=Item&a=New&t=IPM.Note&to=";
 var subject = "&subject=";
+var gmail;
+var yahoo;
+var owa;
+var live;
+
+chrome.extension.sendMessage("gmail", function(response) {
+    gmail = response
+});
+chrome.extension.sendMessage("yahoo", function(response) {
+    yahoo = response
+});
+chrome.extension.sendMessage("owa", function(response) {
+    owa = response
+});
+chrome.extension.sendMessage("live", function(response) {
+    live = response
+});
+
 
 //Context menu entry for Gmail fires this block
 function clickHandleGmail(){
@@ -52,7 +70,7 @@ function clickHandleOWA() {
 
 // create the context menu items
 
-if (localStorage["gmail"] != "false") {
+if (gmail != "false") {
     chrome.contextMenus.create({
         "title" : "Send via Gmail",
         "contexts" :["link"],
@@ -61,23 +79,23 @@ if (localStorage["gmail"] != "false") {
     };
 
 
-    if (localStorage["yahoo"] != "false") {
-            chrome.contextMenus.create({
-                    "title" : "Send via Yahoo!",
-                    "contexts" : ["link"],
-                    "onclick" : clickHandleYmail()
-            });
-    };
+if (yahoo != "false") {
+        chrome.contextMenus.create({
+                "title" : "Send via Yahoo!",
+                "contexts" : ["link"],
+                "onclick" : clickHandleYmail()
+        });
+};
 
-    if (localStorage["live"] != "false") {
-            chrome.contextMenus.create({
-                    "title" : "Send via Microsoft Live Mail",
-                    "contexts" : ["link"],
-                    "onclick" : clickHandleLmail()
-            });
-    };
+if (live != "false") {
+        chrome.contextMenus.create({
+                "title" : "Send via Microsoft Live Mail",
+                "contexts" : ["link"],
+                "onclick" : clickHandleLmail()
+        });
+};
 
-if (localStorage["owa"] != "false") {
+if (owa != "false") {
 			chrome.contextMenus.create({
 			"title" : "Send via OWA",
 			"contexts" : ["link"],

@@ -40,9 +40,9 @@ chrome.browserAction.onClicked.addListener(function (tab) {
 })
 
 //respond to any requests with the state of toggle
-function toggleReq (request, sender, sendResponse) {
-	sendResponse(localStorage["toggle"]+" "+localStorage["default"]);
+function localStorageReq (request, sender, sendResponse) {
+	sendResponse(localStorage[request]);
 }
 
 // calls the toggleReq function whenever a request is sent
-chrome.extension.onMessage.addListener(toggleReq);
+chrome.extension.onMessage.addListener(localStorageReq);

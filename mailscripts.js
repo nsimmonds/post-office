@@ -12,13 +12,14 @@ var toggle;
 var def;
 var mailUrl;
 
-// Send a request to the extension. Extension replies with a 4 character response
-chrome.extension.sendMessage({"localStorage" : "toggle"}, function(response){
-// take the first two characters and assign them to toggle.  Should be either "on"
-// or "no"
-	toggle = response.substring(0,2);
-// assign the last character to def to determine the default mail client
-	def = response.charAt(3);
+// Send a request to the extension for toggle status
+chrome.extension.sendMessage("toggle", function(response){
+	toggle = response;
+    })
+
+//send a request to the extension for the default mail type
+chrome.extension.sendMessage(("default"), function(response){
+	def = response;
 	switch (def) {
 		case "g":
 			mailUrl = gMailUrl;
