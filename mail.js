@@ -82,7 +82,6 @@ function createMenuLive() {
 	};
 };
 
-function createMenuOWA() {
 	if (localStorage["owa"] === "true") {
 			chrome.contextMenus.create({
 			"title" : "Send via OWA",
@@ -90,9 +89,3 @@ function createMenuOWA() {
 			"onclick" : clickHandleOWA()
 		});
 	};
-};
-
-createMenuGmail();
-createMenuYahoo();
-createMenuLive();
-createMenuOWA();
