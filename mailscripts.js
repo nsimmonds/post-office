@@ -8,17 +8,17 @@ var owaHTTP = localStorage["owaUrl"];
 var owaUrl = "https://"+owaHTTP+"/owa/?ae=Item&a=New&t=IPM.Note&to=";
 var subject = "&subject=";
 var url = "";
-var toggle;
+var tog;
 var def;
 var mailUrl;
 
 // Send a request to the extension for toggle status
-chrome.extension.sendMessage("toggle", function(response){
-	toggle = response;
+chrome.extension.sendMessage({sendMe: "toggle"}, function(response){
+	tog = response;
     })
 
 //send a request to the extension for the default mail type
-chrome.extension.sendMessage(("default"), function(response){
+chrome.extension.sendMessage({sendMe: "default"}, function(response){
 	def = response;
 	switch (def) {
 		case "g":
@@ -54,7 +54,7 @@ chrome.extension.sendMessage(("default"), function(response){
 // the script is fully loaded.  This is clearly a bug.  Luckily, the way the below
 // function is written, it doesn't take place until after the page is fully loaded.
 $("a").click(function() {
-	if (toggle === "on") {
+	if (tog === "on") {
 		var url = this.href;
 		url = url.replace("mailto:",mailUrl);
 		url = url.replace("?subject=",subject);

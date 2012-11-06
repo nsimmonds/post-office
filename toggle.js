@@ -1,9 +1,15 @@
 // Copyright (c) 2012 by Nick Simmonds.  All rights reserved.
 
 function setStorage() {
-	if (localStorage["toggle"] === null) {
-		localStorage["toggle"] === "no";
+	if (localStorage["toggle"] === undefined) {
+		localStorage["toggle"] = "no"
 	}
+        if (localStorage["gmail"] === undefined){
+            localStorage["gmail"] = true
+        }
+        if (localStorage["owa"] === undefined){
+            localStorage["owa"] = false
+        }
 }
 
 function setIcon() {
@@ -36,13 +42,10 @@ chrome.browserAction.onClicked.addListener(function (tab) {
 	} else {
 		chrome.browserAction.setIcon({path:"midicon.png"});
 		localStorage["toggle"] = "on";
-	};
+	}
 })
 
-//respond to any requests with the state of toggle
-function localStorageReq (request, sender, sendResponse) {
-	sendResponse(localStorage[request]);
-}
-
-// calls the toggleReq function whenever a request is sent
-chrome.extension.onMessage.addListener(localStorageReq);
+chrome.extension.onMessage.addListener(
+    function(message, sender, sendResponse) {
+    	sendResponse(localStorage[message.sendMe]);
+    });

@@ -12,20 +12,6 @@ var yahoo;
 var owa;
 var live;
 
-chrome.extension.sendMessage("gmail", function(response) {
-    gmail = response
-});
-chrome.extension.sendMessage("yahoo", function(response) {
-    yahoo = response
-});
-chrome.extension.sendMessage("owa", function(response) {
-    owa = response
-});
-chrome.extension.sendMessage("live", function(response) {
-    live = response
-});
-
-
 //Context menu entry for Gmail fires this block
 function clickHandleGmail(){
 	// info starts out undefined, so this returns the whole function
@@ -65,40 +51,46 @@ function clickHandleOWA() {
         window.open(link);
     }
 }
+// remove pre-existing context menu items
 
+chrome.contextMenus.removeAll()
 
 
 // create the context menu items
 
-if (gmail != "false") {
+if (localStorage["gmail"] != "false") {
     chrome.contextMenus.create({
         "title" : "Send via Gmail",
         "contexts" :["link"],
-        "onclick" : clickHandleGmail()
-        });
-    };
+        "onclick" : clickHandleGmail(),
+        "id": "gmail"
+   });
+}
 
 
-if (yahoo != "false") {
-        chrome.contextMenus.create({
-                "title" : "Send via Yahoo!",
-                "contexts" : ["link"],
-                "onclick" : clickHandleYmail()
-        });
-};
+if (localStorage["yahoo"] != "false") {
+    chrome.contextMenus.create({
+        "title" : "Send via Yahoo!",
+        "contexts" : ["link"],
+        "onclick" : clickHandleYmail(),
+        "id":"yahoo"
+    });
+}
 
-if (live != "false") {
-        chrome.contextMenus.create({
-                "title" : "Send via Microsoft Live Mail",
-                "contexts" : ["link"],
-                "onclick" : clickHandleLmail()
-        });
-};
+if (localStorage["live"] != "false") {
+    chrome.contextMenus.create({
+        "title" : "Send via Microsoft Live Mail",
+        "contexts" : ["link"],
+        "onclick" : clickHandleLmail(),
+        "id":"live"
+    });
+}
 
-if (owa != "false") {
-			chrome.contextMenus.create({
-			"title" : "Send via OWA",
-			"contexts" : ["link"],
-			"onclick" : clickHandleOWA()
-		});
-	};
+if (localStorage.owa != "false") {
+    chrome.contextMenus.create({
+        "title" : "Send via OWA",
+        "contexts" : ["link"],
+        "onclick" : clickHandleOWA(),
+        "id":"owa"
+    });
+}
