@@ -52,37 +52,32 @@ function clickHandleOWA() {
 
 // create the context menu items
 
-function createMenuGmail() {
-    if (localStorage["gmail"] === "true") {
+    if (localStorage["gmail"] != "false") {
         chrome.contextMenus.create({
 	    "title" : "Send via Gmail",
 	    "contexts" :["link"],
 	    "onclick" : clickHandleGmail()
 	    });
 	};
-};
 
-function createMenuYahoo() {
-	if (localStorage["yahoo"] === "true") {
+
+	if (localStorage["yahoo"] != "false") {
 		chrome.contextMenus.create({
 			"title" : "Send via Yahoo!",
 			"contexts" : ["link"],
 			"onclick" : clickHandleYmail()
 		});
 	};
-};
 
-function createMenuLive() {
-	if (localStorage["live"] === "true") {
+	if (localStorage["live"] != "false") {
 		chrome.contextMenus.create({
 			"title" : "Send via Microsoft Live Mail",
 			"contexts" : ["link"],
 			"onclick" : clickHandleLmail()
 		});
 	};
-};
 
-	if (localStorage["owa"] === "true") {
+if (localStorage["owa"] != "false") {
 			chrome.contextMenus.create({
 			"title" : "Send via OWA",
 			"contexts" : ["link"],
