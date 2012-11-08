@@ -13,38 +13,41 @@ var def;
 var mailUrl;
 var port = chrome.extension.connect({name: "localStorage"})
 
+function changeDefaults(string){
+    switch (string) {
+            case "g":
+                    mailUrl = gMailUrl;
+                    // Gmail uses a different subject identifier
+                    subject = gMailSub;
+                    break;
+
+            case "y":
+                    mailUrl = yMailUrl;
+                    break;
+
+            case "l":
+                    mailUrl = lMailUrl;
+                    break;
+
+            case "o":
+                    mailUrl = owaUrl;
+                    break;
+
+            // use Gmail as the default option, just in case.	
+            default:
+                    mailUrl = gMailUrl;
+                    subject = gMailSub;
+    }
+}
+
 port.onMessage.addListener(function(storage){
     if (storage.toggle == "on")
         tog = true
     else
         tog = false
     def = storage["default"]
+    changeDefaults(def)
 })
-
-switch (def) {
-        case "g":
-                mailUrl = gMailUrl;
-                // Gmail uses a different subject identifier
-                subject = gMailSub;
-                break;
-
-        case "y":
-                mailUrl = yMailUrl;
-                break;
-
-        case "l":
-                mailUrl = lMailUrl;
-                break;
-
-        case "o":
-                mailUrl = owaUrl;
-                break;
-
-        // use Gmail as the default option, just in case.	
-        default:
-                mailUrl = gMailUrl;
-                subject = gMailSub;
-}
 
 port.postMessage({sendMe: "localStorage"})
 

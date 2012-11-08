@@ -45,6 +45,7 @@ chrome.browserAction.onClicked.addListener(function (tab) {
 	}
         chrome.extension.getBackgroundPage().window.location.reload();
         for (tab in chrome.tabs){
+            console.log(tab.id)
             chrome.tabs.reload(tab.id)
         }
 })
