@@ -44,10 +44,7 @@ chrome.browserAction.onClicked.addListener(function (tab) {
 		localStorage["toggle"] = "on";
 	}
         chrome.extension.getBackgroundPage().window.location.reload();
-        for (tab in chrome.tabs){
-            console.log(tab.id)
-            chrome.tabs.reload(tab.id)
-        }
+        chrome.tabs.reload(tab.id)
 })
 
 // Create listener that responds with the localStorage status

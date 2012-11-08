@@ -1,6 +1,6 @@
 {
 	"name": "Post Office",
-	"version": "0.95",
+	"version": "1",
 	"manifest_version": 2,
 	"options_page" : "preferences.html",
 	"description": "Chrome email functions",
