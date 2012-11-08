@@ -19,9 +19,7 @@ port.onMessage.addListener(function(storage){
     else
         tog = false
     def = storage["default"]
-    console.log(storage)
 })
-port.postMessage({sendMe: "localStorage"})
 
 switch (def) {
         case "g":
@@ -48,11 +46,12 @@ switch (def) {
                 subject = gMailSub;
 }
 
+port.postMessage({sendMe: "localStorage"})
+
 // note (for debugging/learning purposes) that the function above doesn't fire until
 // the script is fully loaded.  This is clearly a bug.  Luckily, the way the below
 // function is written, it doesn't take place until after the page is fully loaded.
 $("a").click(function() {
-        port.postMessage({sendMe: "localStorage"})
     	if (tog === true) {
 		var url = this.href;
 		url = url.replace("mailto:",mailUrl);
