@@ -11,50 +11,49 @@ var url = "";
 var tog;
 var def;
 var mailUrl;
+var port = chrome.extension.connect({name: "localStorage"})
 
-// Send a request to the extension for toggle status
-chrome.extension.sendMessage({sendMe: "toggle"}, function(response){
-	tog = response;
-    })
+port.onMessage.addListener(function(storage){
+    if (storage.toggle == "on")
+        tog = true
+    else
+        tog = false
+    def = storage["default"]
+    console.log(storage)
+})
+port.postMessage({sendMe: "localStorage"})
 
-//send a request to the extension for the default mail type
-chrome.extension.sendMessage({sendMe: "default"}, function(response){
-	def = response;
-	switch (def) {
-		case "g":
-			mailUrl = gMailUrl;
-			// Gmail uses a different subject identifier
-			subject = gMailSub;
-			break;
-			
-		case "y":
-			mailUrl = yMailUrl;
-			break;
-			
-		case "l":
-			mailUrl = lMailUrl;
-			break;
-			
-		case "o":
-			mailUrl = owaUrl;
-			break;
-		
-		// use Gmail as the default option, just in case.	
-		default:
-			mailUrl = gMailUrl;
-			subject = gMailSub;
-	}
-});
+switch (def) {
+        case "g":
+                mailUrl = gMailUrl;
+                // Gmail uses a different subject identifier
+                subject = gMailSub;
+                break;
 
+        case "y":
+                mailUrl = yMailUrl;
+                break;
 
+        case "l":
+                mailUrl = lMailUrl;
+                break;
 
+        case "o":
+                mailUrl = owaUrl;
+                break;
 
+        // use Gmail as the default option, just in case.	
+        default:
+                mailUrl = gMailUrl;
+                subject = gMailSub;
+}
 
 // note (for debugging/learning purposes) that the function above doesn't fire until
 // the script is fully loaded.  This is clearly a bug.  Luckily, the way the below
 // function is written, it doesn't take place until after the page is fully loaded.
 $("a").click(function() {
-	if (tog === "on") {
+        port.postMessage({sendMe: "localStorage"})
+    	if (tog === true) {
 		var url = this.href;
 		url = url.replace("mailto:",mailUrl);
 		url = url.replace("?subject=",subject);

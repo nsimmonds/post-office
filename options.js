@@ -36,8 +36,3 @@ document.addEventListener('DOMContentLoaded', function () {
 
 //this resets the options when the page is loaded
 document.addEventListener('DOMContentLoaded', restoreOptions);
-
-chrome.extension.onMessage.addListener(
-    function(message, sender, sendResponse) {
-    	sendResponse(localStorage[message.sendMe]);
-    });

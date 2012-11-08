@@ -1,6 +1,6 @@
 {
 	"name": "Post Office",
-	"version": "0.9",
+	"version": "0.95",
 	"manifest_version": 2,
 	"options_page" : "preferences.html",
 	"description": "Chrome email functions",
@@ -10,7 +10,7 @@
     },
     "content_scripts": [
     	{
-    		"matches": ["http://*/*"],
+    		"matches": ["*://*/*"],
     		"js": [
     				"jquery-1.7.2.min.js",
     				"mailscripts.js"
@@ -19,16 +19,13 @@
     ],
 	"background" : { 
 		"scripts": [
-                        "listener.js",
                         "mail.js",
                         "toggle.js"
                         ]
 	},
 
 	"permissions": [
-		"contextMenus",
-		"http://*/*",
-		"https://*/*"
+		"*://*/*"
 	],
 	
 	"icons": {

@@ -45,7 +45,9 @@ chrome.browserAction.onClicked.addListener(function (tab) {
 	}
 })
 
-chrome.extension.onMessage.addListener(
-    function(message, sender, sendResponse) {
-    	sendResponse(localStorage[message.sendMe]);
-    });
+// Create listener that responds with the localStorage status
+chrome.extension.onConnect.addListener(function(port){
+    port.onMessage.addListener(function(request){
+        port.postMessage(localStorage);
+    })
+})
