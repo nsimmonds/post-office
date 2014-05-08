@@ -42,9 +42,9 @@ function changeDefaults(string){
 
 port.onMessage.addListener(function(storage){
     if (storage.toggle == "on")
-        tog = true
+        {tog = true}
     else
-        tog = false
+        {tog = false}
     def = storage["default"]
     changeDefaults(def)
 })
@@ -55,10 +55,10 @@ port.postMessage({sendMe: "localStorage"})
 // the script is fully loaded.  This is clearly a bug.  Luckily, the way the below
 // function is written, it doesn't take place until after the page is fully loaded.
 $("a").click(function() {
-    	if (tog === true) {
-		var url = this.href;
-		url = url.replace("mailto:",mailUrl);
-		url = url.replace("?subject=",subject);
-		$(this).attr("href",url);
+	if (tog === true) {
+	var url = this.href;
+	url = url.replace("mailto:",mailUrl);
+	url = url.replace("?subject=",subject);
+	$(this).attr("href",url);
 	}
 });

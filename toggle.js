@@ -21,6 +21,7 @@ function setIcon() {
 }
 
 function toggle() {
+	console.log("test");
 	if (localStorage["toggle"] === "on") {
 		chrome.browserAction.setIcon({path:"disicon.png"});
 		localStorage["toggle"] = "no";

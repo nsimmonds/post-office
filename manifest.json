@@ -10,7 +10,7 @@
     },
     "content_scripts": [
     	{
-    		"matches": ["*://*/*"],
+    		"matches": ["http://*/*","https://*/*"],
     		"js": [
     				"jquery-1.7.2.min.js",
     				"mailscripts.js"
