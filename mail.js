@@ -6,6 +6,7 @@ var yMailUrl = "http://compose.mail.yahoo.com?to=";
 var lMailUrl = "http://mail.live.com/?rru=compose&to=";
 var owaHTTP = localStorage["owaUrl"];
 var owaUrl = "https://"+owaHTTP+"/owa/?ae=Item&a=New&t=IPM.Note&to=";
+var threeUrl = "https://outlook.office365.com/owa/#viewmodel=IMailComposeViewModelFactory&wid=7&ispopout=1";
 var subject = "&subject=";
 var gmail;
 var yahoo;
@@ -51,6 +52,15 @@ function clickHandleOWA() {
         window.open(link);
     }
 }
+
+function clickHandlethree() {
+		return function mailTothree (info) {
+				var link = info.linkUrl;
+				link = link.replace("mailto:",threeUrl);
+				link = link.replace("?subject=",subject);
+				window.open(link);
+		}
+}
 // remove pre-existing context menu items
 
 chrome.contextMenus.removeAll()
@@ -93,4 +103,13 @@ if (localStorage.owa != "false") {
         "onclick" : clickHandleOWA(),
         "id":"owa"
     });
+}
+
+if (localStorage.three != "false") {
+		chrome.contextMenus.create({
+				"title" : "Send via Office 365",
+				"contexts" : ["link"],
+				"onclick" : clickHandlethree(),
+				"id":"three"
+		});
 }

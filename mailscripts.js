@@ -6,6 +6,7 @@ var yMailUrl = "http://compose.mail.yahoo.com?to=";
 var lMailUrl = "http://mail.live.com/?rru=compose&to=";
 var owaHTTP = localStorage["owaUrl"];
 var owaUrl = "https://"+owaHTTP+"/owa/?ae=Item&a=New&t=IPM.Note&to=";
+var threeUrl = "https://outlook.office365.com/owa/#viewmodel=IMailComposeViewModelFactory&wid=7&ispopout=1";
 var subject = "&subject=";
 var url = "";
 var tog;
@@ -33,7 +34,11 @@ function changeDefaults(string){
                     mailUrl = owaUrl;
                     break;
 
-            // use Gmail as the default option, just in case.	
+            case "3":
+                    mailUrl = threeUrl;
+                    break;
+
+            // use Gmail as the default option, just in case.
             default:
                     mailUrl = gMailUrl;
                     subject = gMailSub;
